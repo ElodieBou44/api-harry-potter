@@ -1,0 +1,10 @@
+-   Le retour du filtre sélectionné est à null, même lorsqu'un filtre est sélectionné.
+    main.js - ligne 23
+    index.html - ligne 76-94
+
+-   Je réussis à mettre les résultats de la recherche dans un tableau qui s'affiche dans la console, mais la fonction #displayCharacters() ne veut pas s'enclencher.
+    App.js - ligne 74-86
+
+-   Comment accéder à la méthode privée "displaycharacters" de App.js main.js?
+    main.js - lignes 30 et 35
+    App.js - ligne 59

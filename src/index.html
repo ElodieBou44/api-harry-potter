@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="./main.js" type="module"></script>
+		<link rel="stylesheet" href="css/style.css" />
+		<title>TP1 : Harry Potter characters</title>
+	</head>
+	<body>
+		<aside>
+			<form id="searchForm">
+				<label>
+					Search
+					<input type="search" name="search" />
+				</label>
+				<button>Search</button>
+				<button>Clear</button>
+			</form>
+			<form id="viewForm">
+				<label>
+					View<br /><br />
+					<input
+						type="radio"
+						name="view"
+						id="grille"
+						value="grille"
+					/>
+					<label for="grille">Grid</label><br />
+					<input
+						type="radio"
+						name="view"
+						id="liste"
+						value="liste"
+						checked
+					/>
+					<label for="liste">List</label><br />
+				</label>
+			</form>
+			<form id="sortForm">
+				<!-- <label>
+					Sort - Name / Date<br /><br />
+					<select name="sort" id="asc-desc" value="asc-desc">
+						<option value="select">Select</option>
+						<option value="asc">Ascendant</option>
+						<option value="desc">Descendant</option>
+					</select>
+					<select name="sort" id="nom-date" value="nom-date">
+						<option value="select">Select</option>
+						<option value="nom">Name</option>
+						<option value="date">Date</option>
+					</select>
+				</label> -->
+			</form>
+			<form id="filterForm" class="filterForm"></form>
+		</aside>
+		<main></main>
+	</body>
+</html>

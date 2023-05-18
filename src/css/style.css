@@ -1,0 +1,94 @@
+@import url("./reset.css");
+@font-face {
+    font-family: 'Harry_Potter';
+    src: url('./fonts/HarryPotter.ttf');
+}
+@font-face {
+    font-family: 'Iowan';
+    src: url('./fonts/Iowan.ttf');
+}
+  
+
+body{
+    display: flex;
+}
+
+article{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 15rem;
+    min-height: 32rem;
+    margin: auto;
+    text-align: center;
+    line-height: 1.5rem;
+}
+
+main > ul{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    gap: 3rem; 
+    justify-content: center;
+    margin: 2rem; 
+}
+
+ul, main, img{
+    width: 100%;
+}
+
+aside{
+    margin: 1rem; 
+    font-family: "Iowan";
+    width: 35rem;
+}
+
+button{
+    font-family: "Iowan";   
+}
+
+img{
+    object-fit: cover; 
+    max-height: 20rem;
+    max-width: 20rem;
+}
+
+h2{
+    font-family: "Harry_Potter";
+    font-size: 1.5rem;
+    padding: 0.5rem; 
+    text-align: center;
+    width: 100%;
+}
+
+h3, li{
+    font-family: "Iowan"; 
+}
+
+form{
+    padding: 1rem; 
+    margin: 1rem; 
+    border: solid 1px; 
+    border-radius: 5px;
+}
+
+.grille .opt{
+    visibility: hidden; 
+}
+
+.grille > ul > li > article{
+    min-height: 30rem;
+}
+
+.filterForm label:nth-child(2){
+    text-transform: capitalize;
+
+}
+
+.filterform label{
+    display: block;
+    margin-bottom: 10px
+}
+
+.filterform label label{
+    display: inline-block;
+    margin-bottom: 5px;
+}
