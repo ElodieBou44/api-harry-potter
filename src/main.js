@@ -1,10 +1,7 @@
 import App from "./modules/App.js";
 
-// Créer une nouvelle application.
-// On a seulement à instancer une seule application, plutôt que plusieurs objets.
+// Instanciation d'un nouvel objet app de la classe App
 const app = new App();
-
-// On peut utiliser cette page pour faire tout ce qui n'a pas rapport à l'application, mais qui a rapport à l'interface.
 
 /**
  * Fonction d'ajout d'un bouton de réinitialisation à la fin
@@ -32,7 +29,6 @@ searchButtonEl.addEventListener("click", (evt) => {
 const viewForm = document.getElementById("viewForm");
 
 viewForm.addEventListener("click", (evt) => {
-	// evt.preventDefault();
 	const selectedInput = viewForm.querySelector('input[name="view"]:checked');
 	const selectedValue = selectedInput.value;
 	const mainEl = document.querySelector("main");
@@ -44,33 +40,17 @@ viewForm.addEventListener("click", (evt) => {
 });
 
 // **************************** TRI ****************************
-// Ajout de selects, d'options de tri et d'un bouton 'clear' à l'aide de Javascript
-app.addOptions();
+
 const sortForm = document.getElementById("sortForm");
 addClearButton(sortForm);
 
-const selectSortAD = document.getElementById("asc/desc");
-const selectSortND = document.getElementById("name/date");
+const selectSort = document.getElementById("sort");
 
-// Écouteur d'événement pour le tri Ascendant/Descendant
-selectSortAD.addEventListener("change", () => {
-	const selectedOptionAD = selectSortAD.value;
+// Écouteur d'événement du tri
+selectSort.addEventListener("change", () => {
+	const selectedOption = selectSort.value;
 	let order = "";
-	switch (selectedOptionAD) {
-		case "asc":
-			order = "asc";
-			break;
-		case "desc":
-			order = "desc";
-			break;
-		default:
-			order = "asc";
-	}
-	// Écouteur d'événement pour le tri Nom/Date
-	selectSortND.addEventListener("change", () => {
-		const selectedOptionND = selectSortND.value;
-		app.sortSelectedOptionND(selectedOptionND, order);
-	});
+	app.sortSelectedOption(selectedOption);
 });
 
 // Écouteur d'événement du bouton de vidage
@@ -86,6 +66,7 @@ const filterForm = document.getElementById("filterForm");
 // Ajout des filtres de façon dynamique
 app.addFilters();
 const filterInputs = filterForm.querySelectorAll("input[name='filter']");
+
 // Écouteur d'événement pour la sélection d'un input
 filterInputs.forEach((input) => {
 	input.addEventListener("click", (event) => {
@@ -94,6 +75,7 @@ filterInputs.forEach((input) => {
 		let results = app.searchCharacters(filterString);
 	});
 });
+
 // Ajout d'un bouton de vidage
 addClearButton(filterForm);
 
@@ -101,5 +83,4 @@ addClearButton(filterForm);
 const filterButton = filterForm.querySelector("button");
 filterButton.addEventListener("click", (event) => {
 	app.displayCharacters(app.characters);
-	console.log(app.characters);
 });

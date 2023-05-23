@@ -1,5 +1,3 @@
-// Point central de l'application qui va venir jouer avec les données et afficher des méthodes pour modifier / filtrer / rechercher dans les données.
-
 import characters from "../data/characters.js";
 
 export default class App {
@@ -10,8 +8,19 @@ export default class App {
 	 * Constructeur de la propriété 'characters'
 	 */
 	constructor() {
-		this.characters = characters;
+		this.characters = characters.filter(
+			(character) =>
+				character.dateOfBirth !== null && character.image !== ""
+		);
 		this.#selectedCharacters = [];
+
+		// Changement du format de date de naissance à (MM-JJ-AAAA) pour que le tri à l'aide de l'objet Date fonctionne
+		this.characters = this.characters.map((character) => {
+			const parts = character.dateOfBirth.split("-");
+			const reversedDate = `${parts[1]}-${parts[0]}-${parts[2]}`;
+			return { ...character, dateOfBirth: reversedDate };
+		});
+
 		// Appel de la méthode d'affichage
 		this.displayCharacters(this.characters);
 	}
@@ -26,7 +35,6 @@ export default class App {
 		const mainEl = document.querySelector("main");
 		const ulEl = document.createElement("ul");
 		mainEl.innerHTML = "";
-		console.log(tCharacters);
 		tCharacters.forEach((character) => {
 			const liEl = document.createElement("li");
 			const articleEl = document.createElement("article");
@@ -110,77 +118,55 @@ export default class App {
 	}
 
 	// *************************************** TRI ***************************************
-	/**
-	 * Méthode d'ajout d'options de tri
-	 */
-	addOptions() {
-		const sortForm = document.getElementById("sortForm");
-		const labelSort = document.createElement("label");
-		labelSort.innerHTML = `Sort - Name / Date<br><br>`;
-		sortForm.appendChild(labelSort);
-		// Select Ascending / Descending
-		const selectSortAD = document.createElement("select");
-		selectSortAD.name = "sort";
-		selectSortAD.id = "asc/desc";
-		selectSortAD.value = "asc/desc";
-		selectSortAD.innerHTML = `
-			<option value="default">Select</option>
-			<option value="asc">Ascending</option>
-			<option value="desc">Descending</option>
-		`;
-		labelSort.appendChild(selectSortAD);
-		// Select Name / Date
-		const selectSortND = document.createElement("select");
-		selectSortND.name = "sort";
-		selectSortND.id = "name/date";
-		selectSortND.value = "name/date";
-		selectSortND.innerHTML = `
-			<option value="default">Select</option>
-			<option value="name">Name</option>
-			<option value="date">Date</option>
-		`;
-		labelSort.appendChild(selectSortND);
-	}
 
 	/**
 	 * Méthode de tri selon le nom ou la date
 	 */
-	sortSelectedOptionND(selectedOptionND, order) {
+	sortSelectedOption(selectedOption) {
 		let tAllCharacters = this.characters.slice();
-		console.log(order);
-		switch (selectedOptionND) {
-			case "name":
-				let tSortedN = [];
-				tSortedN = tAllCharacters.sort((a, b) => {
+		let tSorted = [];
+		switch (selectedOption) {
+			case "name-asc":
+				tSorted = tAllCharacters.sort((a, b) => {
 					const nameA = a.name;
 					const nameB = b.name;
 
 					return nameA.localeCompare(nameB);
 				});
-				if (order == "asc") {
-					this.displayCharacters(tSortedN);
-				} else {
-					tSortedN = tSortedN.reverse();
-					this.displayCharacters(tSortedN);
-				}
 				break;
-			case "date":
-				let tSortedD = tAllCharacters.sort((a, b) => {
+			case "name-desc":
+				tSorted = [];
+				tSorted = tAllCharacters
+					.sort((a, b) => {
+						const nameA = a.name;
+						const nameB = b.name;
+
+						return nameA.localeCompare(nameB);
+					})
+					.reverse();
+				break;
+			case "date-asc":
+				tSorted = tAllCharacters.sort((a, b) => {
 					const dateA = new Date(a.dateOfBirth);
 					const dateB = new Date(b.dateOfBirth);
-					if (isNaN(dateA)) return 1;
-					if (isNaN(dateB)) return -1;
 
 					return dateA - dateB;
 				});
-				if (order == "asc") {
-					this.displayCharacters(tSortedD);
-				} else {
-					tSortedD = tSortedD.reverse();
-					this.displayCharacters(tSortedD);
-				}
+				break;
+			case "date-desc":
+				tSorted = tAllCharacters
+					.sort((a, b) => {
+						const dateA = new Date(a.dateOfBirth);
+						const dateB = new Date(b.dateOfBirth);
+						if (isNaN(dateA)) return 1;
+						if (isNaN(dateB)) return -1;
+
+						return dateA - dateB;
+					})
+					.reverse();
 				break;
 		}
+		this.displayCharacters(tSorted);
 	}
 
 	// ************************************ RECHERCHE ************************************
