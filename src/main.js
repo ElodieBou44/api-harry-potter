@@ -25,6 +25,8 @@ searchButtonEl.addEventListener("click", (evt) => {
 	app.searchCharacters(searchString);
 });
 
+const searchForm = document.getElementById("searchForm");
+
 // **************************** VUE ****************************
 const viewForm = document.getElementById("viewForm");
 

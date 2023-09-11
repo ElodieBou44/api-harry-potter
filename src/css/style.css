@@ -11,7 +11,11 @@
 
 body{
     display: flex;
+    background-image: url('./img/hogwarts_black_and_white.jpg');
+    background-size: cover;
+    background-attachment: fixed;
 }
+
 
 article{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -33,6 +37,10 @@ main > ul{
 
 ul, main, img{
     width: 100%;
+}
+
+li{
+    background-color: whitesmoke;
 }
 
 aside{
@@ -68,6 +76,7 @@ form{
     margin: 1rem; 
     border: solid 1px; 
     border-radius: 5px;
+    background-color: whitesmoke;
 }
 
 .grille .opt{
@@ -76,6 +85,14 @@ form{
 
 .grille > ul > li > article{
     min-height: 30rem;
+}
+
+h4{
+    margin-bottom: 0.5rem;
+}
+
+label > p{
+    margin-bottom: 1rem;
 }
 
 .filterForm label:nth-child(2){

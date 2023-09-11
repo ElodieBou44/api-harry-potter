@@ -47,6 +47,7 @@ export default class App {
 			const selectedValue = selectedInput.value;
 			articleEl.innerHTML = `
 					<img src="${character.image}" alt="Image for ${character.name}">
+					<div>
 					<h2>${character.name}</h2>
 					<h3 class="opt">${character.alternate_names}</h3>
 					<ul class="opt">
@@ -54,6 +55,7 @@ export default class App {
 					  <li>House - ${character.house}</li>
 					  <li>Patronus - ${character.patronus}</li>
 					</ul>
+					</div> 
 					`;
 
 			liEl.appendChild(articleEl);
@@ -121,6 +123,7 @@ export default class App {
 
 	/**
 	 * Méthode de tri selon le nom ou la date
+	 * @param string { name-asc | name-desc | date-asc | date-desc }
 	 */
 	sortSelectedOption(selectedOption) {
 		let tAllCharacters = this.characters.slice();
@@ -176,12 +179,16 @@ export default class App {
 	 * @param {string} searchString - Chaine selon laquelle effectuer la recherche
 	 */
 	searchCharacters(searchString) {
+		const searchStringLower = searchString.toLowerCase(); // Convertir la recherche en minuscules
 		this.#selectedCharacters = [];
 		this.characters.forEach((character) => {
+			const nameLower = character.name.toLowerCase(); // Convertir le nom du personnage en minuscules
+			const houseLower = character.house.toLowerCase(); // Convertir la maison en minuscules
+			const ancestryLower = character.ancestry.toLowerCase(); // Convertir l'origine en minuscules
 			if (
-				character.name.includes(searchString) ||
-				character.house.includes(searchString) ||
-				character.ancestry.includes(searchString)
+				nameLower.includes(searchStringLower) || // Comparer avec la recherche en minuscules
+				houseLower.includes(searchStringLower) || // Comparer avec la recherche en minuscules
+				ancestryLower.includes(searchStringLower) // Comparer avec la recherche en minuscules
 			) {
 				this.#selectedCharacters.push(character);
 			}
